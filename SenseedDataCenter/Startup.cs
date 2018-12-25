@@ -45,6 +45,8 @@ namespace SenseedDataCenter
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<SenseedDataCenterContext>();
 
+            services.Configure<IdentityOptions>(options => { options.Password.RequireNonAlphanumeric = false; });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
