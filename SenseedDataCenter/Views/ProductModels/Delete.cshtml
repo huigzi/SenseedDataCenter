@@ -1,0 +1,56 @@
+﻿@model SenseedDataCenter.ViewModel.ProductModel
+
+@{
+    ViewData["Title"] = "删除设备";
+}
+
+<h2>删除设备</h2>
+
+<h3>确定删除此设备？</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SerialId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftWareRev)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoftWareRev)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HardWareRev)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HardWareRev)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Locate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Locate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="删除" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

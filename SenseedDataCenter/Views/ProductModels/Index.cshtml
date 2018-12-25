@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SenseedDataCenter.Models.Product>
+
+@{
+    ViewData["Title"] = "设备中心";
+}
+
+<h2>设备列表</h2>
+
+<p>
+    <a asp-action="Create">注册新设备</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoftWareRev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HardWareRev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoftWareRev)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HardWareRev)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Locate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">编辑设备</a> |
+                    <a asp-controller="AnemometerRecords" asp-action="Index" asp-route-id="@item.SerialId">设备详细数据</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">删除设备</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

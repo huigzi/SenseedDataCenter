@@ -1,0 +1,48 @@
+﻿@model SenseedDataCenter.ViewModel.ProductModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SerialId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SerialId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftWareRev)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoftWareRev)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HardWareRev)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HardWareRev)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Locate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Locate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

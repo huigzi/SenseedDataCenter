@@ -1,0 +1,53 @@
+﻿@model SenseedDataCenter.Models.AnemometerRecord
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>AnemometerRecord</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="E2W" class="control-label"></label>
+                <input asp-for="E2W" class="form-control" />
+                <span asp-validation-for="E2W" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N2S" class="control-label"></label>
+                <input asp-for="N2S" class="form-control" />
+                <span asp-validation-for="N2S" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Velocity" class="control-label"></label>
+                <input asp-for="Velocity" class="form-control" />
+                <span asp-validation-for="Velocity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direction" class="control-label"></label>
+                <input asp-for="Direction" class="form-control" />
+                <span asp-validation-for="Direction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoundVelocity" class="control-label"></label>
+                <input asp-for="SoundVelocity" class="form-control" />
+                <span asp-validation-for="SoundVelocity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
