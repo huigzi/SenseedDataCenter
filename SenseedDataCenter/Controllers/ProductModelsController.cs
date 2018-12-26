@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,25 +14,32 @@ namespace SenseedDataCenter.Controllers
 {
     public class ProductModelsController : Controller
     {
+
+        private readonly UserManager<IdentityUser> _userManager;
+
         private readonly SenseedDataCenterContext _context;
 
-        public ProductModelsController(SenseedDataCenterContext context)
+        public ProductModelsController(SenseedDataCenterContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ProductModels
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.Include(category => category.Category).ToListAsync());
+
+            return View(await _context.Products.Where(p => p.UserName == _userManager.GetUserName(User))
+                .Include(category => category.Category)
+                .ToListAsync());
         }
 
         // GET: ProductModels/Create
         public async Task<IActionResult> Create()
         {
             var categories = await _context.Categories.ToListAsync();
-            ViewBag.Categories = categories.Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() });
+            ViewBag.Categories = categories.Select(r => new SelectListItem {Text = r.Name, Value = r.Id.ToString()});
 
             return View();
         }

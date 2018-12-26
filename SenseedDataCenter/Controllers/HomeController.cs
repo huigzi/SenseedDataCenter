@@ -9,6 +9,8 @@ using SenseedDataCenter.Models;
 
 namespace SenseedDataCenter.Controllers
 {
+
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public IActionResult Index()

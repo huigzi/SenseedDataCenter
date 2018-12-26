@@ -25,9 +25,11 @@ namespace SenseedDataCenter.Controllers
         {
             int pageSize = 20;
 
-            var records = from record in _context.AnemometerRecords
-                where record.ProductId == id
-                select record;
+            //var records = from record in _context.AnemometerRecords
+            //    where record.ProductId == id
+            //    select record;
+
+            var records = _context.AnemometerRecords.OrderByDescending(record => record.RecordDate).Where(record => record.ProductId == id);
 
             if (startTime != null)
             {
@@ -39,9 +41,16 @@ namespace SenseedDataCenter.Controllers
                 records = records.Where(s => s.RecordDate <= stopTime);
             }
 
-            var pageCount = records.Count() % pageSize == 0
-                ? records.Count() / pageSize
-                : records.Count() / pageSize + 1;
+            var temp = records.Count();
+
+            if (temp > 100)
+            {
+                temp = 100;
+            }
+
+            var pageCount = temp % pageSize == 0
+                ? temp / pageSize
+                : temp / pageSize + 1;
 
             var resultRecords = records.Skip((pageIndex - 1) * pageSize).Take(pageSize);
 
