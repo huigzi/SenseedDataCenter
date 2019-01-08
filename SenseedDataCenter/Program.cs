@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,8 +31,11 @@ namespace SenseedDataCenter
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB");
+                    var logger = LogManager.GetLogger(Startup.Repository.Name, typeof(Startup));
+                    logger.Error($"An error occurred seeding the DB{ex.ToString()}");
+
+                    //var logger = services.GetRequiredService<ILogger<Program>>();
+                    //logger.LogError(ex, "An error occurred seeding the DB");
                 }
             }
             host.Run();

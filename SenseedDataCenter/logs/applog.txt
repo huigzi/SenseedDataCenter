@@ -1,0 +1,1 @@
+2019-01-08 10:34:20,489                             [1]                             INFO                              SenseedDataCenter.Startup                             [(null)] - Configure is done

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SenseedDataCenter.Models;
 
 namespace SenseedDataCenter
@@ -22,7 +27,11 @@ namespace SenseedDataCenter
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Repository = LogManager.CreateRepository("NETCoreRepository");
+            XmlConfigurator.Configure(Repository, new FileInfo("log4net.config"));
         }
+
+        public static ILoggerRepository Repository { get; set; }
 
         public IConfiguration Configuration { get; }
 
@@ -54,8 +63,9 @@ namespace SenseedDataCenter
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory logger)
         {
+   
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,6 +87,12 @@ namespace SenseedDataCenter
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            var log = LogManager.GetLogger(Repository.Name, typeof(Startup));
+
+            log.Info("Configure is done");
+
         }
     }
 }
